@@ -19,7 +19,7 @@ module.exports = {
 
 		let commandMatcher = commandRegex(command)
 		bot.onText(commandMatcher, (msg, match) => {
-			let args = msg.text.split(' ').slice(1)
+			let args = parseArgs(msg.text)
 			
 			try {
 				handler(bot, args, msg, commandMap)
@@ -34,4 +34,11 @@ module.exports = {
 
 function commandRegex(commandText) {
 	return new RegExp('^\\/' + commandText + `(@${USERNAME})?`)
+}
+
+function parseArgs(text) {
+	let quoteRegex = new RegExp(/[^\s"']+|"([^"]*)"|'([^']*)'/g)
+	let val = text.match(quoteRegex).map((e) => { return e.replace(/(')|(")/g, "")}).slice(1)
+	console.log(val)
+	return val
 }
