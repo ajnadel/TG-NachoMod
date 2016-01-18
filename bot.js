@@ -9,16 +9,20 @@ console.log('Bot loaded')
 
 // bot.getMe().then()
 
+let commandMap = new Map()
+
 module.exports = {
 	register(payload) { // payload must have `command`, `handler`
 		let rawCommand = payload.command
 		let command = rawCommand.startsWith('/') ? rawCommand.substring(1) : rawCommand
 		let handler = payload.handler
 
+		commandMap.set('/' + command, payload.desc || "No description set for this command.")
+
 		let commandMatcher = commandRegex(command)
 		bot.onText(commandMatcher, (msg, match) => {
 			let args = msg.text.split(' ').slice(1)
-			handler(bot, args, msg)
+			handler(bot, args, msg, commandMap)
 		})
 
 		console.log(`Loaded module '${command}'`)
