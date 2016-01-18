@@ -9,13 +9,14 @@ const users = u.users
 
 module.exports = {
 	CURRENCY_NAME,
-	venmo(from, to, amount) {
+	venmo(from, toName, amount) {
+		let to = u.usersByUsername.get(toName) || u.users[toName]
+		if (!to) return `no user ${toName}`
+
 		if (amount <= 0) return `You cannot send <= 0 ${CURRENCY_NAME}`
 
 		if (!from) return 'You don\'t exist! Try /register.'
 		if (from.balance < amount) return 'not enough $$'
-
-		if (!to) return `no user ${to}`
 
 		from.balance -= amount
 		to.balance += amount

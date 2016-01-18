@@ -1,5 +1,7 @@
 'use strict';
 
+const permission = require('../permissions')
+
 module.exports = {
 	command: 'help',
 	handler(bot, args, msg, cmdmap) {
@@ -9,5 +11,6 @@ module.exports = {
 		}, cmdmap);
 		bot.sendMessage(msg.chat.id, text, {parse_mode: "Markdown"})
 	},
-	desc: "Shows a list of commands."
+	desc: "Shows a list of commands.",
+	permissionRequired: permission.LEVEL_UNREGISTERED
 }

@@ -4,6 +4,8 @@ require('dotenv').load() // :)
 
 let botRunner = require('./bot')
 
+botRunner.middleware(require('./middleware/user'))
+
 botRunner.register(require('./modules/ping'))
 botRunner.register(require('./modules/whoami'))
 botRunner.register(require('./currency/command'))

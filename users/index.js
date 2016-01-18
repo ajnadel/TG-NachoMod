@@ -2,10 +2,11 @@
 
 const fs = require('fs')
 const user = require('./user')
+const permission = require('../permissions')
 
 const SAVEFILE = __dirname + '/save.json'
 
-let users = getSave()
+let users = getSave() // is obj, not Map, because needs to be serialized
 let usersByUsername = new Map()
 
 // register the server (will overwrite)
@@ -15,17 +16,29 @@ registerUser({
 }, { balance: Infinity })
 // infinte balance will not serialize, so must be set every time
 
+let getUserByUsername = (username) => usersByUsername.get(username.toLowerCase())
+let getUserById = (id) => users[id]
+
+let UNREGISTERED = user()
+UNREGISTERED.id = 'UNREGISTERED'
+UNREGISTERED.preferredName = 'unregistered user'
+UNREGISTERED.permissionLevel = permission.LEVEL_IGNORED
+UNREGISTERED.unregistered = true
+
 module.exports = {
-	registerUser,
+	getUserByUsername,
+	getUserById,
 	users,
+	usersByUsername,
+	registerUser,
 	triggerSave,
-	usersByUsername
+	UNREGISTERED
 }
 
 function registerUser(userObj, properties) {
 	let newUser = user()
 	newUser.userId = userObj.id
-	newUser.username = userObj.username
+	if (userObj.username) newUser.username = userObj.username.toLowerCase()
 	newUser.preferredName = userObj.first_name
 	if (userObj.last_name) newUser.preferredName += userObj.last_name
 
@@ -39,7 +52,8 @@ function registerUser(userObj, properties) {
 
 function getSave() {
 	if (!fs.existsSync(SAVEFILE)) fs.writeFileSync(SAVEFILE, '')
-	let save = fs.readFileSync(SAVEFILE).toString() || '{}'
+	// is obj, not Map, because needs to be serialized
+	let save = fs.readFileSync(SAVEFILE).toString() || '{}' 
 	return JSON.parse(save)
 }
 

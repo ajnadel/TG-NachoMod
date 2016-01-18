@@ -4,6 +4,7 @@ const u = require('./index')
 const users = u.users
 const currency = require('../currency')
 const logger = require('../logger')
+const permission = require('../permissions')
 
 const STARTING_BALANCE = 100
 
@@ -20,5 +21,6 @@ module.exports = {
 		})()
 		bot.sendMessage(msg.chat.id, result)
 	},
-	desc: "Register to be able to use commands."
+	desc: "Register to be able to use commands.",
+	permissionRequired: permission.LEVEL_UNREGISTERED
 }
