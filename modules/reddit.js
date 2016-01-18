@@ -26,7 +26,7 @@ module.exports = {
 			if (e) {
 				return bot.sendMessage(msg.chat.id, "Error: " + e, {parse_mode: "Markdown"})
 			}
-			bot.sendMessage(msg.chat.id, `*${p.title}* - ${p.score} votes\n---\n${p.url || p.text}`, {parse_mode: "Markdown"})
+			bot.sendMessage(msg.chat.id, `*${p.title}* - ${p.score} votes\n---\n[${p.url}](${p.url})`, {parse_mode: "Markdown"})
 		}, sub, sort, t)
 	}
 }
