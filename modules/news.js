@@ -31,5 +31,6 @@ module.exports = {
 			bot.sendMessage(msg.chat.id, "Disabled news")
 			chatIDs.splice(chatIDs.indexOf(msg.chat.id), 1)
 		}
-	}
+	}, 
+	desc: "Toggles news updates."
 }

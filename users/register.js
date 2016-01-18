@@ -19,5 +19,6 @@ module.exports = {
 			and given ${STARTING_BALANCE} ${currency.CURRENCY_NAME} to start with!`
 		})()
 		bot.sendMessage(msg.chat.id, result)
-	}
+	},
+	desc: "Register to be able to use commands."
 }

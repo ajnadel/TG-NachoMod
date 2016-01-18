@@ -13,5 +13,6 @@ module.exports = {
 
 		let result = currency.venmo(from, to, amount)
 		bot.sendMessage(msg.chat.id, result)
-	}
+	}, 
+	desc: "Send money to other people by their username."
 }

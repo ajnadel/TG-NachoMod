@@ -22,5 +22,6 @@ module.exports = {
 		logger.transaction(msg.from.id, 'ran whoami')
 
 		bot.sendMessage(msg.chat.id, response, {parse_mode: "Markdown"})
-	}
+	},
+	desc: "Sends all the information we have about you."
 }

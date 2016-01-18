@@ -28,5 +28,6 @@ module.exports = {
 			}
 			bot.sendMessage(msg.chat.id, `*${p.title}* - ${p.score} votes\n---\n[${p.url}](${p.url})`, {parse_mode: "Markdown"})
 		}, sub, sort, t)
-	}
+	},
+	desc: "Gets a post from a subreddit. Example usage: `/reddit pics top/all`"
 }
