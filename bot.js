@@ -38,7 +38,5 @@ function commandRegex(commandText) {
 
 function parseArgs(text) {
 	let quoteRegex = new RegExp(/[^\s"']+|"([^"]*)"|'([^']*)'/g)
-	let val = text.match(quoteRegex).map((e) => { return e.replace(/(')|(")/g, "")}).slice(1)
-	console.log(val)
-	return val
+	return text.match(quoteRegex).map((e) => { return e.replace(/(')|(")/g, "")}).slice(1)
 }
