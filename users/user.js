@@ -1,15 +1,13 @@
-'use strict'
+'use strict';
 
-let userPrototype = {
-	userId: '',
+let userTemplate = {
+	userId: null,
+	username: null,
 	preferredName: '',
 	balance: 0,
-	ignored: false,
-	addMoney(amount) {
-		this.money += 
-	}
+	ignored: false
 }
 
 module.exports = function userFactory() {
-	return Object.create(userPrototype)
+	return Object.assign({}, userTemplate)
 }

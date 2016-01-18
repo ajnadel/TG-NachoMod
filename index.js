@@ -6,3 +6,5 @@ let botRunner = require('./bot')
 
 botRunner.register(require('./modules/ping'))
 botRunner.register(require('./modules/whoami'))
+botRunner.register(require('./currency/command'))
+botRunner.register(require('./users/register'))

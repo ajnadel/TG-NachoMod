@@ -7,8 +7,6 @@ const USERNAME = process.env['USERNAME']
 let bot = new TelegramBot(BOT_TOKEN, {polling: true})
 console.log('Bot loaded')
 
-// bot.getMe().then()
-
 module.exports = {
 	register(payload) { // payload must have `command`, `handler`
 		let rawCommand = payload.command
@@ -18,7 +16,11 @@ module.exports = {
 		let commandMatcher = commandRegex(command)
 		bot.onText(commandMatcher, (msg, match) => {
 			let args = msg.text.split(' ').slice(1)
-			handler(bot, args, msg)
+			try {
+				handler(bot, args, msg)
+			} catch (e) {
+				console.error('ERROR! ', e)
+			}
 		})
 
 		console.log(`Loaded module '${command}'`)
