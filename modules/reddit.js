@@ -9,9 +9,13 @@ function getSubredditPost(cb, subreddit, sort, t){
 		if (!JSON.parse(b).data) {
 			return cb(null, "Something went wrong accessing the Reddit API")
 		}
-		cb(JSON.parse(b).data.children.filter((p) => {
-			return !p.data.stickied
-		})[0].data)
+		try {
+			cb(JSON.parse(b).data.children.filter((p) => {
+				return !p.data.stickied
+			})[0].data)
+		} catch (e) {
+			console.error("ERROR!", e)
+		}
 	})
 }
 
